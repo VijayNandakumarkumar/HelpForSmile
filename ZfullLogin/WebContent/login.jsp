@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="com.ZfullLogin.SignuoDAO.SignupDao" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="css/login.css">
+<meta name="google-signin-client_id" content="70311988550-07tst2vdvplv5lpem4qne2sis6e22g00.apps.googleusercontent.com">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://use.fontawesome.com/bacae9e57c.js"></script>
 
@@ -40,6 +43,22 @@ $(document).ready(function() {
     });
 });
 	
+function onSignIn(googleUser) {
+	console.log("-----------------------------------");
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	  console.log("-----------------------------------");
+	  $.get("google", {
+		  user: profile.getName(),
+		  email: profile.getId()
+	  }, function(data){
+		  alert(data);
+	  });
+}	
+	
 </script>
 </head>
 <body class="img-fluid">
@@ -59,6 +78,8 @@ $(document).ready(function() {
 					</div>
 					<button class="btn btn-primary submit-button" id="sign-in">Sign-in</button><br>
 					<button class="btn btn-primary submit-button" id="sign-up">Sign-up</button>
+					<div class="or-class" align="center">____________or____________</div>
+					<div class="g-signin2" data-onsuccess="onSignIn" align="center"></div>
 				</div>
 			</form>
 		</div>

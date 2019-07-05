@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 
 public class SignupDao {
-	
+	public final static String MID="bIsMxY42860847182298";
 	public Boolean check(String name, String id, String pwd) {
 		String url = "jdbc:mysql://localhost:3306/test";
 		String db_name = "root";
@@ -35,4 +35,14 @@ public class SignupDao {
 		return false;
 	}
 
+	public String return_string() {
+		System.out.println("Inisde");
+		return "klklklklklkl";
+	}
+
+	public SignupDao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 }
